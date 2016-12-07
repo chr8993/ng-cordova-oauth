@@ -137,7 +137,7 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://api.amazon.com/auth/o2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=Authorization_code" + "&code=" + requestToken })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://api.amazon.com/auth/o2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })

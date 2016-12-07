@@ -27,9 +27,9 @@
           }
           var browserRef = window.cordova.InAppBrowser.open("https://www.amazon.com/ap/oa?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=profile", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
           browserRef.addEventListener("loadstart", function(event) {
-            if((!!(event.url).match(redirect_uri))) {
+            if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://api.amazon.com/auth/o2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=Authorization_code" + "&code=" + requestToken })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://api.amazon.com/auth/o2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
